@@ -40,15 +40,15 @@ contract Blog {
         owner = msg.sender;
     }
 
-    function updateName(string memory _name) public {
+    function updateName(string memory _name) public onlyOwner {
         name = _name;
     }
 
-    function updateSaying(string memory _saying) public {
+    function updateSaying(string memory _saying) public onlyOwner {
         saying = _saying;
     }
 
-    function updateBgImage(string memory _bgImage) public {
+    function updateBgImage(string memory _bgImage) public onlyOwner {
         bgImage = _bgImage;
     }
 
