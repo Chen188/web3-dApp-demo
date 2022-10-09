@@ -1,10 +1,24 @@
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
 import PostsLayout from "../../layouts/posts-layout";
-import { BlogModel } from '../../model/blog';
+import { BlogModel } from '../../lib/utils';
 
-export default function Posts(props) {
-    const { posts, siteInfo } = props
+export default function Posts( {siteInfo}) {
+    let [posts, setPosts] = useState();
+    let [loading, setLoading ] = useState(true)
+
+    useEffect( async () => {
+        // load posts from browser
+        const blogModel = new BlogModel();
+        try {
+            let _posts = await blogModel.fetchPosts();
+            setLoading(false)
+            setPosts( _posts );
+        } catch (e) {
+            console.error(e)
+        }
+    }, [])
 
     return (
         <PostsLayout siteInfo={ siteInfo }>
@@ -14,12 +28,10 @@ export default function Posts(props) {
                         {
                             posts && posts.length && posts.map((post, idx) => (
                                 <div className="post-preview" key={idx}>
-                                    <Link href={`/posts/${post[3]}`}>
-                                        <a>
-                                            <h2 className="post-title">{post[1]}</h2>
-                                            <h3 className="post-subtitle">{post[2]}</h3>
-                                        </a>
-                                    </Link>
+                                    <a href={`/posts/${post[3]}`}>
+                                        <h2 className="post-title">{post[1]}</h2>
+                                        <h3 className="post-subtitle">{post[2]}</h3>
+                                    </a>
                                     <p className="post-meta">
                                         Posted on September 25, 2022
                                     </p>
@@ -28,7 +40,12 @@ export default function Posts(props) {
 
                         }
                         {
-                            !(posts && posts.length) &&
+                            loading && <div className="post-preview">
+                                <h2 className="post-title"> Loading ... </h2>
+                            </div>
+                        }
+                        {
+                            !loading && !(posts && posts.length) &&
                             <div className="post-preview">
                                 <h2 className="post-title"> No post found </h2>
                             </div>
@@ -39,15 +56,13 @@ export default function Posts(props) {
         </PostsLayout>
     );
 }
-
 export async function getServerSideProps() {
     const blogModel = new BlogModel();
-    const posts = await blogModel.fetchPosts();
+
+    // load site info while `npm run build`
     const siteInfo = await blogModel.fetchSiteInfo()
-    // console.log(posts)
     return {
         props: {
-            posts: JSON.parse(JSON.stringify(posts)),
             siteInfo
         }
     }

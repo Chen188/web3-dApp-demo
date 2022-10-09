@@ -8,7 +8,7 @@ export default function Posthead({ post }) {
                             <h1>{post && post.title || 'Web3 Blog Demo'}</h1>
                             <div className="subheading">{post && post.desc || 'A dApp powered by BlockChain'}</div>
                             <span className="meta">
-                                Posted on September 25, 2022
+                                { post && post.content && 'Posted on September 25, 2022' }
                             </span>
                         </div>
                     </div>

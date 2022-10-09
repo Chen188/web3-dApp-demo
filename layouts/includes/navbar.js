@@ -24,9 +24,6 @@ export default function Navbar({ children }) {
             providerOptions: {
                 walletconnect: {
                     package: WalletConnectProvider,
-                    // options: {
-                    //     infuraId: process.env.NEXT_PUBLIC_INFURA_ID
-                    // },
                 },
             },
         })
