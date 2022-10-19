@@ -1,5 +1,7 @@
 # Web3 blog demo
 
+English | [中文](./docs/README_CN.md)
+
 This is a Web3 Blog dApp demo, developed with Next.js for frontend, EVM-compatible smart contract for backend, IPFS for media data store.
 
 What it looks like:
@@ -61,6 +63,7 @@ In this template, we'll create a VPC with Subnets, the EC2 instance is placed in
 ### 2) Default security group rules
 | Port | Allowed Source | Description
 | - | - | -
+| TCP 22 | 0.0.0.0/0 | SSH
 | TCP 3000 | 0.0.0.0/0 | Node.js backend server
 | TCP 4001 | 0.0.0.0/0 | IPFS p2p network
 | TCP 5001 | 0.0.0.0/0 | IPFS API endpoint
@@ -107,7 +110,7 @@ nvm install 16.17
 
 In our demo, a cover image is used as our homepage's background, this image is saved in IPFS network. The [cid](https://docs.ipfs.tech/concepts/content-addressing/#what-is-a-cid) of this image will be stored in the Blog smart contract.
 
-There’re handful tools can be used to upload image file to IPFS, such as IPFS CLI, IPFS Desktop app and so on. Here we'll use the IPFS WebUI, you can find the WebUI URL in [CloudFormation outputs](#cloudformation-outputs) section. Open this URL in a new browser tab, here's what it looks like:
+There’re handful tools can be used to upload image file to IPFS, such as IPFS CLI, IPFS Desktop app and so on. Here we'll use the IPFS WebUI, you can find the WebUI URL in [CloudFormation outputs](#5-cloudformation-outputs) section. Open this URL in a new browser tab, here's what it looks like:
 
 ![WebUI home](./docs/assets/webui-home.jpg)
 
@@ -129,7 +132,7 @@ cp .env.testnet .env.local
 ```
 Edit *.env.local*:
 
-- Set value of *NEXT_PUBLIC_ipfs_gateway* and *NEXT_PUBLIC_ipfs_uri* with the outputs in section [CloudFormation outputs](#cloudformation-outputs), or use public IPFS service such as [Infura](https://infura.io/). For example:
+- Set value of *NEXT_PUBLIC_ipfs_gateway* and *NEXT_PUBLIC_ipfs_uri* with the outputs in section [CloudFormation outputs](#5-cloudformation-outputs), or use public IPFS service such as [Infura](https://infura.io/). For example:
 
     ```
     NEXT_PUBLIC_ipfs_gateway=http://1.2.3.4:5001/api/v0
@@ -139,7 +142,7 @@ Edit *.env.local*:
 
 ### 5) Edit the smart contract deployment script
 
-Edit the `./scripts/deploy.sh` with your prefered editor, replace *QmeisUNzsWHmjmD8hX3mGsC8sYiYYwx2Qif98bHJPBvQsG* with the cid in section [Upload an image to IPFS](#upload-an-image-to-ipfs), save & close this file.
+Edit the `./scripts/deploy.sh` with your prefered editor, replace *QmeisUNzsWHmjmD8hX3mGsC8sYiYYwx2Qif98bHJPBvQsG* with the cid in section [Upload an image to IPFS](#2-upload-an-image-to-ipfs), save & close this file.
 
 ### 6) Deploy the smart contract
 ```bash
