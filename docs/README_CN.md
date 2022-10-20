@@ -19,6 +19,7 @@
 <summary>2) 创建或导入一个 Ethereum 账户到钱包中</summary>
 
 ![Create account in metamask step 1](./assets/metamask-create-account-1.jpg)
+
 ![Create account in metamask step 2](./assets/metamask-create-account-2.jpg)
 </details>
 
@@ -26,7 +27,9 @@
 <summary>3) 添加 Polygon Mumbai 测试网络到钱包</summary>
 
 ![Add network step 1](./assets/metamask-add-network-1.jpg)
+
 ![Add network step 2](./assets/metamask-add-network-2.jpg)
+
 ![Add network step 3](./assets/metamask-add-network-3.jpg)
 </details>
 
@@ -40,9 +43,11 @@
 <summary>5) 从水龙头免费获得一些 MATICs (这些测试Token没有任何价值), 仅用于支付测试网中的交易手续费</summary>
 
 如 <a href='https://mumbaifaucet.com/'>这里</a>：
+
 ![Get MATICs option 1](./assets/get-matic-1.jpg)
 
 或者 <a href='https://faucet.polygon.technology/'>这里</a>：
+
 ![Get MATICs option 2](./assets/get-matic-2.jpg)
 </details>
 
