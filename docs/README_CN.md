@@ -40,9 +40,19 @@
 </details>
 
 <details>
-<summary>5) 从水龙头免费获得一些 MATICs (这些测试Token没有任何价值), 仅用于支付测试网中的交易手续费</summary>
+<summary>5) 导出私钥<a id='5-export-pk'></a></summary>
 
-如 <a href='https://mumbaifaucet.com/'>这里</a>：
+![Export pk 1](./docs/assets/metamask-export-pk-1.jpg)
+
+![Export pk 2](./docs/assets/metamask-export-pk-2.jpg)
+
+将私钥保存下来，我们会在后续的步骤中使用到。
+</details>
+
+<details>
+<summary>6) 从水龙头免费获得一些 MATICs (这些测试Token没有任何价值), 仅用于支付测试网中的交易手续费</summary>
+
+如 <a href='https://mumbaifaucet.com/'>Alchemy’s Mumbai</a>：
 
 ![Get MATICs option 1](./assets/get-matic-1.jpg)
 
@@ -146,16 +156,19 @@ cp .env.testnet .env.local
 - 将 *NEXT_PUBLIC_ipfs_gateway* 及 *NEXT_PUBLIC_ipfs_uri* 替换为 [CloudFormation 输出](#5-cloudformation-outputs) 页的值, 或者使用第三方的IPFS服务，如 [Infura](https://infura.io/). 修改后的格式如:
 
     ```
-    NEXT_PUBLIC_ipfs_gateway=http://1.2.3.4:5001/api/v0
-    NEXT_PUBLIC_ipfs_uri=http://1.2.3.4:8080/ipfs/
+    NEXT_PUBLIC_ipfs_api=http://1.2.3.4:5001/api/v0
+    NEXT_PUBLIC_ipfs_gateway=http://1.2.3.4:8080/ipfs/
     ```
 - 如果您使用的是 Infura 提供的 IPFS服务, 您可以将 *NEXT_PUBLIC_ipfs_auth_user* 的值设置为项目id, 将 *NEXT_PUBLIC_ipfs_auth_password* 设置为项目的密钥。
 
 ### 5) 编辑智能合约部署脚本
 
-使用您熟悉的编辑器打开 `./scripts/deploy.sh`, 将 *QmeisUNzsWHmjmD8hX3mGsC8sYiYYwx2Qif98bHJPBvQsG* 替换为 [上传图片到 IPFS](#2-upload-an-image-to-ipfs) 章节中的cid.
+使用您熟悉的编辑器打开 `./scripts/deploy.js`, 将 *QmeisUNzsWHmjmD8hX3mGsC8sYiYYwx2Qif98bHJPBvQsG* 替换为 [上传图片到 IPFS](#2-upload-an-image-to-ipfs) 章节中的cid.
 
 ### 6) 部署智能合约
+
+这里我们需要将 `pk` 替换为步骤 <a href='5-export-pk'>导出私钥</a> 中的私钥.
+
 ```bash
 # this will deploy Blog Contract into the address corresponding to pk.
 pk=<replace-with-your-private-key> npx hardhat run scripts/deploy.js

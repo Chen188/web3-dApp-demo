@@ -19,14 +19,17 @@ What it looks like:
 <summary>2) Create or import your Ethereum account into wallet.</summary>
 
 ![Create account in metamask step 1](./docs/assets/metamask-create-account-1.jpg)
+
 ![Create account in metamask step 2](./docs/assets/metamask-create-account-2.jpg)
 </details>
 
 <details>
-<summary>3) Add Polygon Mumbai testnet into wallet.</summary>
+<summary>3) Add Polygon Mumbai Testnet into wallet.</summary>
 
 ![Add network step 1](./docs/assets/metamask-add-network-1.jpg)
+
 ![Add network step 2](./docs/assets/metamask-add-network-2.jpg)
+
 ![Add network step 3](./docs/assets/metamask-add-network-3.jpg)
 </details>
 
@@ -37,19 +40,34 @@ What it looks like:
 </details>
 
 <details>
-<summary>5) Get some MATICs from <a href='https://mumbaifaucet.com/'>MUMBAI FAUCET</a> or <a href='https://faucet.polygon.technology/'>this</a>(it's free and this token has no values), so that you can pay the transaction fees</summary>
+<summary>5) Export private key<a id='5-export-pk'></a></summary>
+
+![Export pk 1](./docs/assets/metamask-export-pk-1.jpg)
+
+![Export pk 2](./docs/assets/metamask-export-pk-2.jpg)
+
+Note down the private key, and keep it secret. We'll use it in following step.
+</details>
+
+<details>
+<summary>6) Get some MATICs from faucet(it's free and this token has no values), so that you can pay the transaction fees</summary>
+
+Use <a href='https://mumbaifaucet.com/'>Alchemy’s Mumbai faucet:</a>
 
 ![Get MATICs option 1](./docs/assets/get-matic-1.jpg)
+
+or <a href='https://faucet.polygon.technology/'>Polygon Faucet</a>:
+
 ![Get MATICs option 2](./docs/assets/get-matic-2.jpg)
 </details>
 
 ## 2. One-click IPFS node setup template
 
-In this demo, we'll use the decentrailized file storage service, IPFS, to store media files, in order to get better user experience for end-users, we can setup our own IPFS service instead of using public service provider's.
+In this demo, we'll use the decentralized file storage service, IPFS, to store media files, in order to get better user experience for end-users, we can setup our own IPFS service instead of using public service provider's.
 
 Here we provide a AWS CloudFormation template to help launch a single IPFS node on AWS EC2, so that you can setup IPFS service with several clicks, rather than dive into IPFS deployment details.
 
-The IPFS kubo version inclueded in the template is 0.16.0, you may change the template file and upgrade to newer version if needed.
+The IPFS kubo version included in the template is 0.16.0, you may change the template file and upgrade to newer version if needed.
 
 **WARN 1**: The IPFS node created using this template is open to public and for short-time test purpose only, you can modify its security group to limit access only from your own IP, check this [doc](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html#updating-security-group-rules) for more information.
 
@@ -135,16 +153,19 @@ Edit *.env.local*:
 - Set value of *NEXT_PUBLIC_ipfs_gateway* and *NEXT_PUBLIC_ipfs_uri* with the outputs in section [CloudFormation outputs](#5-cloudformation-outputs), or use public IPFS service such as [Infura](https://infura.io/). For example:
 
     ```
-    NEXT_PUBLIC_ipfs_gateway=http://1.2.3.4:5001/api/v0
-    NEXT_PUBLIC_ipfs_uri=http://1.2.3.4:8080/ipfs/
+    NEXT_PUBLIC_ipfs_api=http://1.2.3.4:5001/api/v0
+    NEXT_PUBLIC_ipfs_gateway=http://1.2.3.4:8080/ipfs/
     ```
 - If you're using Infura IPFS service, you can set *NEXT_PUBLIC_ipfs_auth_user* with your Infura IPFS project id, and *NEXT_PUBLIC_ipfs_auth_password* with Infura IPFS project secret.
 
 ### 5) Edit the smart contract deployment script
 
-Edit the `./scripts/deploy.sh` with your prefered editor, replace *QmeisUNzsWHmjmD8hX3mGsC8sYiYYwx2Qif98bHJPBvQsG* with the cid in section [Upload an image to IPFS](#2-upload-an-image-to-ipfs), save & close this file.
+Edit the `./scripts/deploy.js` with your prefered editor, replace *QmeisUNzsWHmjmD8hX3mGsC8sYiYYwx2Qif98bHJPBvQsG* with the cid in section [Upload an image to IPFS](#2-upload-an-image-to-ipfs), save & close this file.
 
 ### 6) Deploy the smart contract
+
+Get the private key in step <a href='5-export-pk'>export private key</a>.
+
 ```bash
 # this will deploy Blog Contract into the address corresponding to pk.
 pk=<replace-with-your-private-key> npx hardhat run scripts/deploy.js
