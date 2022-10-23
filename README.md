@@ -10,7 +10,7 @@ What it looks like:
 ## 1. Prerequisites
 
 <details>
-<summary>1) Install Wallet plugin into your browser, such as <a href='https://microsoftedge.microsoft.com/addons/detail/metamask/ejbalbakoplchlghecdalmeeeajnimhm'>MetaMask</a>. </summary>
+<summary>1) Install Wallet plugin into your browser, such as MetaMask for <a href='https://microsoftedge.microsoft.com/addons/detail/metamask/ejbalbakoplchlghecdalmeeeajnimhm'>MS Edge</a>, and <a href='https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn'>Chrome</a>. </summary>
 
 ![Install metamask](./docs/assets/metamask-install.jpg)
 </details>
@@ -31,6 +31,15 @@ What it looks like:
 ![Add network step 2](./docs/assets/metamask-add-network-2.jpg)
 
 ![Add network step 3](./docs/assets/metamask-add-network-3.jpg)
+
+**Metamask Network Parameters**
+```
+Network Name: Mumbai Testnet
+New RPC URL: https://rpc-mumbai.maticvigil.com
+Chain ID: 80001
+Currency Symbol: MATIC
+Block Explorer URL: https://polygonscan.com/
+```
 </details>
 
 <details>
@@ -78,6 +87,8 @@ In this template, we'll create a VPC with Subnets, the EC2 instance is placed in
 
 ![Arch](./docs/assets/ipfs-node-arch.png)
 
+**The OS of this IPFS EC2 instance is Ubuntu 20.04 with default user ubuntu.**
+
 ### 2) Default security group rules
 | Port | Allowed Source | Description
 | - | - | -
@@ -87,13 +98,21 @@ In this template, we'll create a VPC with Subnets, the EC2 instance is placed in
 | TCP 5001 | 0.0.0.0/0 | IPFS API endpoint
 | TCP 8080 | 0.0.0.0/0 | IPFS Gateway endpoint
 
-### 3) Deployment option 1 - China Regions
+### 3) Deploy template
+
+#### Create or import EC2 Key Pair
+
+If any key pairs exist in the Region you want to deploy the template, and you have its private key, you can skip this step and goto depolyment options.
+
+Otherwise, please follow the [document](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html) to create or import an existing key pair.
+
+#### Option 1 - China Regions
 
 Click to setup IPFS instance in AWS China Region. You can use default settings in CloudFormation console.
 
 [![Launch Stack](./docs/assets/launch-stack.png)](https://console.amazonaws.cn/cloudformation/home?#/stacks/create/review?templateURL=https://workshop-binc.s3.cn-northwest-1.amazonaws.com.cn/web3-demo/ipfs-single-node-template.yaml&stackName=ipfs-node) 
 
-### 4) Deployment option 2 - Global Regions
+#### Option 2 - Global Regions
 Click to setup IPFS instance in AWS Global Region. You can use default settings in CloudFormation console.
 
 [![Launch Stack](./docs/assets/launch-stack.png)](https://console.aws.amazon.com/cloudformation/home?#/stacks/create/review?templateURL=https://workshop-binc.s3.cn-northwest-1.amazonaws.com.cn/web3-demo/ipfs-single-node-template.yaml&stackName=ipfs-node)
@@ -108,17 +127,24 @@ In the CloudFormation Console, navigate to the Outputs tab and note down the Api
 
 You may deploy this demo into the EC2 instance created in last step, or into your local computer, we'll choice the prior method.
 
+You can use SSH command to connect to your EC2 instance:
+
+```bash
+ssh -i path/to/your-key-pair.pem ubuntu@ec2.instance.public.ip
+```
+
+Or use [Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) from AWS System Manager.
+
 ### 1) Install Node.js v16
 
 We'll use [nvm.sh](https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating) to install nodejs env.
 
 ```bash
 # This installs nvm into ~/.nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash 
+curl -o- https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 
 # This loads nvm
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+source ~/.profile
 
 # This installs nodejs version 16.17
 nvm install 16.17 
@@ -169,6 +195,11 @@ Get the private key in step <a href='5-export-pk'>export private key</a>.
 ```bash
 # this will deploy Blog Contract into the address corresponding to pk.
 pk=<replace-with-your-private-key> npx hardhat run scripts/deploy.js
+
+>>example output<<
+Downloading compiler 0.8.4
+Compiled 3 Solidity files successfully
+Blog deployed to: 0x6666666666666666666688888888888888888888
 ```
 
 ### 7) Build and run
