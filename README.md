@@ -135,6 +135,8 @@ ssh -i path/to/your-key-pair.pem ubuntu@ec2.instance.public.ip
 
 Or use [Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) from AWS System Manager.
 
+We'll use *ubuntu* user to execute commands in all the following steps.
+
 ### 1) Install Node.js v16
 
 We'll use [nvm.sh](https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating) to install nodejs env.

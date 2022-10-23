@@ -137,6 +137,8 @@ ssh -i path/to/your-key-pair.pem ubuntu@ec2.instance.public.ip
 
 或者使用 AWS System Manager 中的 [Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html) 功能。
 
+后续的步骤中，我们将使用默认的 *ubuntu* 用户来执行命令。
+
 ### 1) 安装 Node.js v16
 
 我们会使用 [nvm.sh](https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating) 来配置Node的环境。
@@ -166,7 +168,7 @@ nvm install 16.17
 
 ### 3) 下载源码
 
-SSH登录到EC2服务器中，并clone代码：
+登录到 EC2 服务器中，并clone代码：
 
 ```bash
 git clone https://github.com/Chen188/web3-dApp-demo && cd web3-dApp-demo && npm install
