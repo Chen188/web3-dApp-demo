@@ -51,9 +51,9 @@ Block Explorer URL: https://polygonscan.com/
 <details>
 <summary>5) 导出私钥<a id='5-export-pk'></a></summary>
 
-![Export pk 1](./docs/assets/metamask-export-pk-1.jpg)
+![Export pk 1](./assets/metamask-export-pk-1.jpg)
 
-![Export pk 2](./docs/assets/metamask-export-pk-2.jpg)
+![Export pk 2](./assets/metamask-export-pk-2.jpg)
 
 将私钥保存下来，我们会在后续的步骤中使用到。
 </details>
