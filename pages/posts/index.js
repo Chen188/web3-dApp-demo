@@ -36,8 +36,7 @@ export default function Posts( {siteInfo}) {
                                         Posted on September 25, 2022
                                     </p>
                                 </div>
-                            ))
-
+                            )) || ''
                         }
                         {
                             loading && <div className="post-preview">
