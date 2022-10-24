@@ -38,7 +38,7 @@ Network Name: Mumbai Testnet
 New RPC URL: https://rpc-mumbai.maticvigil.com
 Chain ID: 80001
 Currency Symbol: MATIC
-Block Explorer URL: https://polygonscan.com/
+Block Explorer URL: https://mumbai.polygonscan.com/
 ```
 </details>
 
@@ -168,7 +168,7 @@ In the Files tab, import a image file you like, and note down the cid, i.e. *Qmf
 Login to your IPFS EC2 instance and clone source code.
 
 ```bash
-git clone https://github.com/Chen188/web3-dApp-demo && cd web3-dApp-demo && npm install
+git clone https://github.com/Chen188/web3-dApp-demo && cd web3-dApp-demo && npm ci
 ```
 
 ### 4) Edit local environment file
@@ -192,11 +192,12 @@ Edit the `./scripts/deploy.js` with your prefered editor, replace *QmeisUNzsWHmj
 
 ### 6) Deploy the smart contract
 
-Get the private key in step <a href='5-export-pk'>export private key</a>.
+Get the private key in step <a href='5-export-pk'>export private key</a>, and run the Shell script:
 
 ```bash
-# this will deploy Blog Contract into the address corresponding to pk.
-pk=<replace-with-your-private-key> npx hardhat run scripts/deploy.js
+# this will deploy Blog Contract into the address corresponding to pk
+privateKey=REPLACE-WITH-YOUR-PRIVATE-KEY
+pk=$privateKey npx hardhat run scripts/deploy.js
 
 >>example output<<
 Downloading compiler 0.8.4

@@ -38,7 +38,7 @@ Network Name: Mumbai Testnet
 New RPC URL: https://rpc-mumbai.maticvigil.com
 Chain ID: 80001
 Currency Symbol: MATIC
-Block Explorer URL: https://polygonscan.com/
+Block Explorer URL: https://mumbai.polygonscan.com/
 ```
 </details>
 
@@ -171,7 +171,7 @@ nvm install 16.17
 登录到 EC2 服务器中，并clone代码：
 
 ```bash
-git clone https://github.com/Chen188/web3-dApp-demo && cd web3-dApp-demo && npm install
+git clone https://github.com/Chen188/web3-dApp-demo && cd web3-dApp-demo && npm ci
 ```
 
 ### 4) 编辑环境变量
@@ -191,15 +191,16 @@ cp .env.testnet .env.local
 
 ### 5) 编辑智能合约部署脚本
 
-使用您熟悉的编辑器打开 `./scripts/deploy.js`, 将 *QmeisUNzsWHmjmD8hX3mGsC8sYiYYwx2Qif98bHJPBvQsG* 替换为 [上传图片到 IPFS](#2-upload-an-image-to-ipfs) 章节中的cid.
+使用您熟悉的编辑器打开 `./scripts/deploy.js`, 将 *QmeisUNzsWHmjmD8hX3mGsC8sYiYYwx2Qif98bHJPBvQsG* 替换为 [上传图片到 IPFS](#2-upload-an-image-to-ipfs) 章节中的cid，然后保存。
 
 ### 6) 部署智能合约
 
-这里我们需要将 `pk` 替换为步骤 <a href='5-export-pk'>导出私钥</a> 中的私钥.
+这里我们需要将 `pk` 替换为步骤 <a href='5-export-pk'>导出私钥</a> 中的私钥，然后执行如下Shell命令：
 
 ```bash
 # this will deploy Blog Contract into the address corresponding to pk.
-pk=<replace-with-your-private-key> npx hardhat run scripts/deploy.js
+privateKey=REPLACE-WITH-YOUR-PRIVATE-KEY
+pk=$privateKey npx hardhat run scripts/deploy.js
 
 >>示例输出<<
 Downloading compiler 0.8.4
