@@ -35,7 +35,7 @@
 **Metamask Network Parameters**
 ```
 Network Name: Mumbai Testnet
-New RPC URL: https://rpc-mumbai.maticvigil.com
+New RPC URL: https://rpc-mumbai.matic.today 或者 https://rpc-mumbai.maticvigil.com
 Chain ID: 80001
 Currency Symbol: MATIC
 Block Explorer URL: https://mumbai.polygonscan.com/
